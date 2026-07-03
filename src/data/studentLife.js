@@ -5,7 +5,7 @@
 
 export const trips = [
   {
-    title: "Voyage à Paris",
+    title: "Voyage à Paris 2026",
     date: "Juin 2026",
     description:
       "Séjour culturel ...",
@@ -15,7 +15,7 @@ export const trips = [
     video: null, // { title: "Récap du voyage", url: "#" }
   },
     {
-    title: "Voyage à Paris",
+    title: "Voyage à Paris 2025",
     date: "Juin 2025",
     description:
       "Séjour culturel ...",

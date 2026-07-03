@@ -2,16 +2,28 @@
 
 export const testimonials = [
   {
-    name: "Prénom Nom",
-    promotion: "Promotion 2024",
-    path: "École de management / ENS / Sciences Po...",
-    quote:
-      "À compléter — un court témoignage sur l'expérience de la prépa B/L.",
+    name: "Lara",
+    promotion: "Promotion 2025",
+    path: "en master de sociologie",
+    quote: "La prépa ? Une multitude de savoirs appliquables dans une multitude de situations... Une fabuleuse expérience pour tous ceux qui ont soif d'apprendre.",
+    
+    video: {
+      title: "Témoignage vidéo",
+      url: "https://drive.google.com/file/d/17rDCRQptFygmoQEp3m4AO6fu_QcOEDCL/view?usp=sharing",
+      thumbnail: "/images/temoignages/Lara.png",
+      },
   },
   {
-    name: "Prénom Nom",
-    promotion: "Promotion 2023",
-    path: "Magistère / École...",
-    quote: "À compléter.",
+    name: "Eva",
+    promotion: "Promotion 2025",
+    path: "Science Po Lille, en double cursus franco-italien",
+    quote:
+      "Chercher à comprendre l'origine des choses... De superbes rencontres... Faut y aller !",
+    thumbnail: "/images/temoignages/Eva.png",
+    video: {
+      title: "Témoignage vidéo",
+      url: "https://drive.google.com/file/d/14lFr7l_H_zwlQ1lLGxQoiYKZO6xBlUI1/view?usp=sharing",
+      thumbnail: "/images/temoignages/Eva.png",
+    },
   },
 ];

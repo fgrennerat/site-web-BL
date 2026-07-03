@@ -9,14 +9,14 @@ export const disciplines = [
     accent: "encre",
     description:
       "Algèbre linéaire, analyse, et probabilités : des outils formels qui structurent le raisonnement.",
-    resources: {
-      
+    resources: { 
       files: [
-        { title: "Programme et progression", url: "https://nuage03.apps.education.fr/index.php/s/7qa9MwmT2p8RppE" },
-         { src: "/images/maths/dancing_math.pdf", alt: "Fonctions qui dansent !" },
+        { title: "Programme et progression", url: "/documents/maths/programme-mathsBL.pdf" },
+        { title: "Fonctions dansantes" , url: "/images/maths/dancing_math.pdf"},
+        { title: "Chapitre AN1" , url: "documents/maths/AN1-cours-IMP.pdf"},
         //{ title: "Fiches de méthode", url: "#" },
       ],
-      videos: [{ title: "xxx", url: "#" }],
+     videos: [{ title: "Cours introductif — À compléter", url: "#" }],
     },
   },
   {
