@@ -10,25 +10,25 @@ export const trips = [
     description:
       "Séjour culturel ...",
     photos: [
-      // { src: "/images/vie-etudiante/vienne-1.jpg", alt: "Description de la photo" },
+       { src: "/images/vie-etudiante/Paris26-1.jpg", alt: "GroupeHK" },
     ],
     video: null, // { title: "Récap du voyage", url: "#" }
   },
     {
-    title: "Voyage à Paris 2025",
+    title: "Désinté.",
     date: "Juin 2025",
     description:
-      "Séjour culturel ...",
+      "Rafting à St Pierre de Boeuf",
     photos: [
-      // { src: "/images/vie-etudiante/vienne-1.jpg", alt: "Description de la photo" },
+       { src: "/images/vie-etudiante/Raft26-1.jpg", alt: "camp" },
     ],
     video: null, // { title: "Récap du voyage", url: "#" }
   },
-  {
-    title: "Sorties théâtre",
-    date: "À compléter",
-    description: "À compléter.",
-    photos: [],
-    video: null,
-  },
+  // {
+  //   title: "Sorties théâtre",
+  //   date: "À compléter",
+  //   description: "À compléter.",
+  //   photos: [],
+  //   video: null,
+  // },
 ];
