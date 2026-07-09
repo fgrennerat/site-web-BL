@@ -3,7 +3,7 @@ export default function Hero() {
     <section id="top" className="relative overflow-hidden px-6 pb-20 pt-16 sm:pt-24">
       <div className="mx-auto max-w-6xl">
         <p className="font-mono text-xs uppercase tracking-[0.25em] text-bronze">
-          Classe préparatoire pluridisciplinaire
+          CPGE B/L - Classe préparatoire pluridisciplinaire
         </p>
 
         <h1 className="mt-6 max-w-3xl font-display text-4xl font-medium leading-[1.1] text-encre sm:text-6xl">

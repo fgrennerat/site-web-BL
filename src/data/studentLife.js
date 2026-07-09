@@ -32,7 +32,7 @@ export const trips = [
   },
     {
     title: "Désinté.",
-    date: "Juin 2025",
+    date: "Juin 2026",
     description:
       "Rafting à St Pierre de Boeuf",
     photos: [

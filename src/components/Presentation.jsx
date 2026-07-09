@@ -2,7 +2,15 @@ const stats = [
   { label: "Années de formation", 
     value: "2 ans" },
   //{ label: "Disciplines majeures", value: "6" },
-  { label: "Débouchés", value: "Écoles de commerce, ENS, écoles d'ingénieur, Sciences Po, magistères" },
+  { label: "Débouchés", value: `Écoles normales supérieures
+Écoles de commerce
+Écoles d'ingénieur (GEIGIC, ENSG, ENSAI, ENSAE)
+Sciences Politiques,
+Journalisme (Celsa, ...)
+Écoles d'économie (TSE)
+Université Paris-Dauphine (L3 sciences sociales)
+...` 
+},
 ];
 
 export default function Presentation() {
@@ -34,7 +42,7 @@ export default function Presentation() {
               <dt className="font-mono text-xs uppercase tracking-widest text-ardoise">
                 {s.label}
               </dt>
-              <dd className="mt-1 font-display text-xl text-encre">{s.value}</dd>
+              <dd className="mt-1 whitespace-pre-line font-display text-xl text-encre">{s.value}</dd>
             </div>
           ))}
         </dl>

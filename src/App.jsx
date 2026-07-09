@@ -25,9 +25,10 @@ export default function App() {
         <Hero />
         <Presentation />
         <Disciplines activeCode={activeCode} onSelect={handleSelect} />
-        <Resources activeCode={activeCode} onReset={() => setActiveCode(null)} />
+        
         <StudentLife />
         <Testimonials />
+        <Resources activeCode={activeCode} onReset={() => setActiveCode(null)} />
       </main>
       <Footer />
     </div>

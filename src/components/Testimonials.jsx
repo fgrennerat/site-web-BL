@@ -40,6 +40,21 @@ function VideoLink({ video }) {
   );
 }
 
+function DocumentLink({ document }) {
+  if (!document) return null;
+
+  return (
+    <a
+      href={document.url}
+      target="_blank"
+      rel="noreferrer"
+      className="mt-3 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-encre underline decoration-sauge/40 underline-offset-4 hover:decoration-sauge"
+    >
+      📄 {document.title}
+    </a>
+  );
+}
+
 function TestimonialCard({ testimonial }) {
   return (
     <figure className="relative border-l-2 border-bronze/40 bg-velin-dark/30 p-6">
@@ -48,6 +63,7 @@ function TestimonialCard({ testimonial }) {
       </blockquote>
 
       <VideoLink video={testimonial.video} />
+      <DocumentLink document={testimonial.document} />
 
       <figcaption className="mt-4 font-mono text-xs uppercase tracking-widest text-ardoise">
         {testimonial.name} — {testimonial.promotion}

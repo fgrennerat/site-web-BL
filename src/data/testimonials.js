@@ -27,22 +27,25 @@ export const testimonials = [
     },
   },
 
-  {
+    {
     name: "Hugo",
     promotion: "Promotion 2024",
-    //path: "Lettre",
-    quote: "Lettre sur la beauté de son expérience en CPGE BL au LPO E. Mounier.",
-    files: [
-        { title: "Cahier de calcul" , url: "documents/maths/cahier_de_calcul_HKBL.pdf"},
-        { title: "Chapitre AN1 (analyse)" , url: "documents/maths/AN1-cours-IMP.pdf"},
-        { title: "Fonctions dansantes" , url: "/images/maths/dancing_math.pdf"},
-        //{ title: "Fiches de méthode", url: "#" },
-      ],
-    document: {
-      title: "sur la beauté de son expérience en CPGE BL au LPO E. Mounier",
-      //file: "https://drive.google.com/file/d/17rDCRQptFygmoQEp3m4AO6fu_QcOEDCL/view?usp=sharing",
-      url: "/images/temoignages/Hugo.pdf",
-      },
+    //path: "Ancien étudiant de la B/L de Mounier",
+    quote: "Sur la beauté de son expérience en CPGE BL à Mounier",
+    document: { 
+      title: "Lire la lettre complète",
+      url: "/documents/temoignages/Hugo.pdf",
+    },
   },
+  /* { 
+       name: "Hugo",
+    promotion: "Promotion 2024",
+    //path: "Ancien étudiant de la B/L de Mounier",
+    quote: "Sur la beauté de son expérience en CPGE BL à Mounier",
+    document: { 
+      title: "Lire la lettre complète",
+      url: "/documents/temoignages/Hugo.pdf",
+    },
+  }, */
 
 ];

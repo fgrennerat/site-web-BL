@@ -1,16 +1,18 @@
 import { disciplines } from "../data/disciplines";
+import { generalResources } from "../data/generalResources";
 
-function ResourceGroup({ discipline }) {
-  const { videos, files } = discipline.resources;
+function ResourceList({ title, videos, files }) {
   const hasContent = videos.length > 0 || files.length > 0;
 
   return (
     <div className="border-b border-encre/10 py-8 first:pt-0 last:border-b-0">
       <div className="flex items-center gap-3">
-        <span className="font-mono text-xs tracking-widest text-bronze">
-          {discipline.code}
-        </span>
-        <h3 className="font-display text-xl text-encre">{discipline.name}</h3>
+        {title.code && (
+          <span className="font-mono text-xs tracking-widest text-bronze">
+            {title.code}
+          </span>
+        )}
+        <h3 className="font-display text-xl text-encre">{title.name}</h3>
       </div>
 
       {!hasContent && (
@@ -92,8 +94,20 @@ export default function Resources({ activeCode, onReset }) {
         </div>
 
         <div className="mt-8">
+          {!activeCode && (
+            <ResourceList
+              title={{ name: "Général" }}
+              videos={generalResources.videos}
+              files={generalResources.files}
+            />
+          )}
           {filtered.map((d) => (
-            <ResourceGroup key={d.code} discipline={d} />
+            <ResourceList
+              key={d.code}
+              title={{ code: d.code, name: d.name }}
+              videos={d.resources.videos}
+              files={d.resources.files}
+            />
           ))}
         </div>
       </div>
