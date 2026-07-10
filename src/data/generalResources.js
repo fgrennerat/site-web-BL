@@ -8,6 +8,10 @@
 export const generalResources = {
   videos: [],
   files: [
+     {
+      title: "Emplois du temps rentrée 2026 (1ère et 2e année)",
+      url: "/documents/EDT.pdf",
+    },
     {
       title: "Travail à faire pour la rentrée 2026 (hypokhâgne)",
       url: "/documents/travailRentreeHK.pdf",
