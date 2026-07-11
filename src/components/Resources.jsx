@@ -1,5 +1,30 @@
 import { disciplines } from "../data/disciplines";
 import { generalResources } from "../data/generalResources";
+import { documentsManifest } from "../data/documentsManifest";
+
+// Regroupe une liste de fichiers par sous-dossier ("group"), en gardant
+// d'abord les fichiers sans sous-dossier (à la racine).
+function groupFiles(files) {
+  const order = [];
+  const byGroup = new Map();
+
+  for (const f of files) {
+    const key = f.group || null;
+    if (!byGroup.has(key)) {
+      byGroup.set(key, []);
+      order.push(key);
+    }
+    byGroup.get(key).push(f);
+  }
+
+  order.sort((a, b) => {
+    if (a === null) return -1;
+    if (b === null) return 1;
+    return 0;
+  });
+
+  return order.map((key) => [key, byGroup.get(key)]);
+}
 
 function ResourceList({ title, videos, files }) {
   const hasContent = videos.length > 0 || files.length > 0;
@@ -49,20 +74,29 @@ function ResourceList({ title, videos, files }) {
             <p className="font-mono text-[11px] uppercase tracking-widest text-ardoise">
               Documents
             </p>
-            <ul className="mt-2 space-y-2">
-              {files.map((f) => (
-                <li key={f.title}>
-                  <a
-                    href={f.url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-2 text-sm text-encre underline decoration-sauge/40 underline-offset-4 hover:decoration-sauge"
-                  >
-                    {f.title}
-                  </a>
-                </li>
-              ))}
-            </ul>
+            {groupFiles(files).map(([group, groupFiles]) => (
+              <div key={group || "_root"} className="mt-2">
+                {group && (
+                  <p className="mt-3 font-mono text-[10px] uppercase tracking-wider text-sauge first:mt-0">
+                    {group}
+                  </p>
+                )}
+                <ul className="mt-1 space-y-2">
+                  {groupFiles.map((f) => (
+                    <li key={f.url}>
+                      <a
+                        href={f.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-2 text-sm text-encre underline decoration-sauge/40 underline-offset-4 hover:decoration-sauge"
+                      >
+                        {f.title}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         )}
       </div>
@@ -106,7 +140,7 @@ export default function Resources({ activeCode, onReset }) {
               key={d.code}
               title={{ code: d.code, name: d.name }}
               videos={d.resources.videos}
-              files={d.resources.files}
+              files={documentsManifest[d.slug] || []}
             />
           ))}
         </div>
