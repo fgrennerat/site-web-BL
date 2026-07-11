@@ -21,8 +21,7 @@ function prettify(name) {
     .replace(/\.[^/.]+$/, "")
     .replace(/[-_]+/g, " ")
     .trim()
-    .replace(/\s+/g, " ")
-    .replace(/\b\p{L}/gu, (c) => c.toUpperCase());
+    .replace(/\s+/g, " ");
 }
 
 function collectFiles(dir, baseDir) {
