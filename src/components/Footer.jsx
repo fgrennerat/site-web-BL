@@ -1,4 +1,14 @@
-export default function Footer() {
+export default function Footer({ minimal = false }) {
+  if (minimal) {
+    return (
+      <footer className="border-t border-encre/10 px-6 py-16">
+        <p className="mx-auto max-w-6xl font-mono text-[11px] text-ardoise/70">
+          CPGE B/L — Lycée Emmanuel Mounier
+        </p>
+      </footer>
+    );
+  }
+
   return (
     <footer id="contact" className="border-t border-encre/10 px-6 py-16">
       <div className="mx-auto flex max-w-6xl flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">

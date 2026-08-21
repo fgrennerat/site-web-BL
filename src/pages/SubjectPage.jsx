@@ -73,7 +73,7 @@ export default function SubjectPage() {
           {data && <ResourceSections videos={data.videos} files={data.files} />}
         </div>
       </main>
-      <Footer />
+      <Footer minimal />
     </div>
   );
 }
