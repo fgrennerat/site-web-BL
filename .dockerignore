@@ -4,3 +4,6 @@ dist
 .gitignore
 README.md
 *.md
+data/resources
+.env
+.env.*

@@ -1,12 +1,12 @@
-// Modifiez ce fichier pour ajuster les matières et leur description.
+// Identité et description "par défaut" de chaque matière.
 //
-// Les DOCUMENTS ne se déclarent plus ici : déposez simplement vos fichiers
-// dans public/documents/<slug>/ (le "slug" de chaque discipline est indiqué
-// ci-dessous) — ils apparaîtront automatiquement sur le site après un
-// "git push" (Netlify régénère la liste à chaque déploiement).
+// La description ci-dessous n'est qu'un repli : une fois qu'un admin a
+// enregistré une description via /admin, c'est elle qui s'affiche (stockée
+// dans le volume, pas ici). Les vidéos et documents ne se déclarent plus
+// dans ce fichier non plus : ils se gèrent entièrement depuis /admin.
 //
-// Les VIDÉOS restent à déclarer ici manuellement (lien YouTube, Drive...),
-// car elles ne sont pas hébergées dans public/.
+// "code" sert de badge court affiché sur les cartes. "slug" sert à la fois
+// d'URL de la page matière (/<slug>) et de nom de dossier de ressources.
 
 export const disciplines = [
   {
@@ -16,14 +16,6 @@ export const disciplines = [
     accent: "encre",
     description:
       "Algèbre linéaire, analyse, et probabilités : des outils formels qui structurent le raisonnement.",
-    resources: {
-      videos: [
-        {
-          title: "Introduction à l'algèbre linéaire",
-          url: "https://www.3blue1brown.com/?search=linear+algebra&lesson=eola-preview",
-        },
-      ],
-    },
   },
   {
     code: "SES (6h)",
@@ -32,7 +24,6 @@ export const disciplines = [
     accent: "bronze",
     description:
       "Économie et sociologie : comprendre les mécanismes économiques et les dynamiques sociales contemporaines.",
-    resources: { videos: [] },
   },
   {
     code: "LET (4h)",
@@ -41,7 +32,6 @@ export const disciplines = [
     accent: "bronze",
     description:
       "Littérature française et comparée : l'analyse littéraire au service d'une culture générale exigeante.",
-    resources: { videos: [] },
   },
   {
     code: "PHI (4h)",
@@ -50,7 +40,6 @@ export const disciplines = [
     accent: "sauge",
     description:
       "Une formation à l'exigence conceptuelle, de la lecture des textes classiques à la dissertation.",
-    resources: { videos: [] },
   },
   {
     code: "HIS (4h)",
@@ -58,7 +47,6 @@ export const disciplines = [
     slug: "histoire",
     accent: "encre",
     description: "Histoire du monde contemporain.",
-    resources: { videos: [] },
   },
   {
     code: "LV1 (4h)",
@@ -67,7 +55,6 @@ export const disciplines = [
     accent: "sauge",
     description:
       "Anglais et deuxième langue vivante : maîtrise linguistique et ouverture aux cultures étrangères.",
-    resources: { videos: [] },
   },
   {
     code: "LV2 (2h)",
@@ -75,7 +62,6 @@ export const disciplines = [
     slug: "lv2",
     accent: "encre",
     description: "Allemand / espagnol / italien / arabe / chinois",
-    resources: { videos: [] },
   },
   {
     code: "GEO (4h)",
@@ -83,7 +69,6 @@ export const disciplines = [
     slug: "geo",
     accent: "bronze",
     description: "Enjeux géopolitiques, en lien direct avec l'actualité.",
-    resources: { videos: [] },
   },
   {
     code: "CG (2h)",
@@ -92,7 +77,6 @@ export const disciplines = [
     accent: "sauge",
     description:
       "Un enseignement transversal qui articule les autres disciplines et prépare à l'épreuve de culture générale des concours.",
-    resources: { videos: [] },
   },
   {
     code: "EPS (2h)",
@@ -100,6 +84,5 @@ export const disciplines = [
     slug: "eps",
     accent: "sauge",
     description: " ",
-    resources: { videos: [] },
   },
 ];

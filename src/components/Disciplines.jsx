@@ -1,7 +1,7 @@
 import { disciplines } from "../data/disciplines";
 import DisciplineCard from "./DisciplineCard";
 
-export default function Disciplines({ activeCode, onSelect }) {
+export default function Disciplines() {
   return (
     <section id="disciplines" className="px-6 py-20">
       <div className="mx-auto max-w-6xl">
@@ -10,18 +10,13 @@ export default function Disciplines({ activeCode, onSelect }) {
             Les disciplines
           </h2>
           <span className="font-mono text-xs uppercase tracking-widest text-ardoise">
-            Cliquez pour filtrer les ressources
+            Cliquez pour voir les ressources
           </span>
         </div>
 
         <div className="mt-10 grid gap-px overflow-hidden border border-encre/15 bg-encre/15 sm:grid-cols-2 lg:grid-cols-3">
           {disciplines.map((d) => (
-            <DisciplineCard
-              key={d.code}
-              discipline={d}
-              isActive={activeCode === d.code}
-              onSelect={onSelect}
-            />
+            <DisciplineCard key={d.code} discipline={d} />
           ))}
         </div>
       </div>

@@ -12,9 +12,14 @@ dist
 dist-ssr
 *.local
 
-# Généré automatiquement par scripts/generate-documents-manifest.mjs
-# (predev / prebuild) — pas besoin de le versionner.
-src/data/documentsManifest.js
+# Volume local (dev) pour les ressources uploadées/gérées depuis /admin —
+# voir server/index.mjs (RESOURCES_DIR) et scripts/migrate-resources-to-volume.mjs.
+# En production ce sont les mêmes chemins, mais dans le volume Docker.
+/data/resources/
+
+# Jeton d'admin en local (voir README.md).
+.env
+.env.*
 
 # Editor directories and files
 .vscode/*

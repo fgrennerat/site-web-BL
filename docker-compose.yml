@@ -1,0 +1,25 @@
+# Exemple de déploiement auto-hébergé (le seul chemin de déploiement du
+# site depuis le passage à l'upload/suppression de ressources à chaud —
+# Netlify ne peut pas héberger le volume ni le petit process d'API).
+#
+#   ADMIN_TOKEN=un-secret-long-et-aleatoire docker compose up -d
+#
+# Le volume "resources" contient les documents/vidéos uploadés depuis
+# /admin : il survit aux redéploiements de l'image tant qu'il n'est pas
+# supprimé explicitement (docker compose down -v le supprimerait).
+
+services:
+  site:
+    image: ghcr.io/fgrennerat/site-web-bl:latest
+    # Pour builder l'image en local plutôt que d'utiliser celle de GHCR :
+    # build: .
+    ports:
+      - "8080:80"
+    environment:
+      ADMIN_TOKEN: ${ADMIN_TOKEN:?définissez ADMIN_TOKEN avant de lancer le conteneur}
+    volumes:
+      - resources:/data/resources
+    restart: unless-stopped
+
+volumes:
+  resources:
