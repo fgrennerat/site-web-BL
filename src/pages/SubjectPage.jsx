@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { disciplines } from "../data/disciplines";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
@@ -40,18 +40,8 @@ export default function SubjectPage() {
   return (
     <div className="min-h-screen bg-velin text-encre">
       <Nav />
-      <main className="mx-auto max-w-4xl px-6 py-20">
-        <Link
-          to="/#disciplines"
-          className="font-mono text-xs uppercase tracking-widest text-bronze hover:underline"
-        >
-          ← Retour à l'accueil
-        </Link>
-
-        <span className="mt-8 block font-mono text-xs tracking-widest text-bronze">
-          {discipline.code}
-        </span>
-        <h1 className="mt-2 font-display text-4xl font-medium text-encre">
+      <main className="mx-auto max-w-4xl px-6 py-10">
+        <h1 className="font-display text-4xl font-medium text-encre">
           {discipline.name}
         </h1>
         {data?.teacher && (
