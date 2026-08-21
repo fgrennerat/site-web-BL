@@ -248,7 +248,7 @@ function Dashboard({ token, onLogout }) {
   };
 
   const removeSection = (id) => {
-    if (!confirm("Supprimer cette section ? Les fichiers/vidéos qui y étaient rattachés redeviendront sans section.")) return;
+    if (!confirm("Supprimer cette section ? Les fichiers/liens qui y étaient rattachés redeviendront sans section.")) return;
     saveSections(sections.filter((s) => s.id !== id));
   };
 
@@ -259,7 +259,7 @@ function Dashboard({ token, onLogout }) {
     try {
       await putConfig(slug, token, { videos: next.map(stripVideo) });
       setVideos(next);
-      notify("Vidéos enregistrées.");
+      notify("Liens enregistrés.");
     } catch (err) {
       notify(err.message, "error");
     }
@@ -405,7 +405,7 @@ function Dashboard({ token, onLogout }) {
 
             <Card
               title="Sections"
-              description="Une section est purement organisationnelle : elle n'existe que dans la config, pas comme dossier sur le disque. Rattachez-y des fichiers ou des vidéos ci-dessous."
+              description="Une section est purement organisationnelle : elle n'existe que dans la config, pas comme dossier sur le disque. Rattachez-y des fichiers ou des liens ci-dessous."
             >
               {sections.length === 0 && (
                 <p className="text-sm italic text-ardoise">Aucune section pour l'instant.</p>
@@ -537,8 +537,8 @@ function Dashboard({ token, onLogout }) {
               </div>
             </Card>
 
-            <Card title="Vidéos">
-              {videos.length === 0 && <p className="text-sm italic text-ardoise">Aucune vidéo.</p>}
+            <Card title="Liens">
+              {videos.length === 0 && <p className="text-sm italic text-ardoise">Aucun lien.</p>}
               <div className="space-y-3">
                 {videos.map((v, i) => (
                   <div key={i} className="flex flex-wrap items-end gap-2 border-b border-encre/10 pb-3 last:border-b-0">
