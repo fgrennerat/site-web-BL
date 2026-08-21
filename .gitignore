@@ -12,6 +12,10 @@ dist
 dist-ssr
 *.local
 
+# Généré automatiquement par scripts/generate-documents-manifest.mjs
+# (predev / prebuild) — pas besoin de le versionner.
+src/data/documentsManifest.js
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
