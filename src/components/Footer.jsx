@@ -1,7 +1,7 @@
 export default function Footer({ minimal = false }) {
   if (minimal) {
     return (
-      <footer className="border-t border-encre/10 px-6 py-16">
+      <footer className="border-t border-encre/10 px-6 py-4">
         <p className="mx-auto max-w-6xl font-mono text-[11px] text-ardoise/70">
           CPGE B/L — Lycée Emmanuel Mounier
         </p>

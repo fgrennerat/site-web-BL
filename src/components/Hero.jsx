@@ -6,10 +6,11 @@ export default function Hero() {
           CPGE B/L - Classe préparatoire pluridisciplinaire
         </p>
 
-        <h1 className="mt-6 max-w-3xl font-display text-4xl font-medium leading-[1.1] text-encre sm:text-6xl">
-          Penser avec les nombres,
+        <h1 className="mt-6 max-w-3xl font-display text-4xl font-medium leading-[1.1] text-encre sm:text-5xl">
+          {/* Penser avec les nombres,
           <br />
-          écrire avec les idées.
+          écrire avec les idées. */}
+          Classe préparatoire BL du lycée Mounier - Grenoble
         </h1>
 
         <p className="mt-6 max-w-xl text-lg leading-relaxed text-encre-light">
