@@ -155,6 +155,20 @@ function SectionSelect({ sections, value, onChange, id }) {
   );
 }
 
+// "hk"/"k"/"" (Général) — voir server/lib/resources.mjs. Sur un fichier ou
+// un lien qui a une section, cette valeur n'est jamais lue (l'année de la
+// section fait autorité) : on n'affiche donc ce select que quand il n'y a
+// pas de section (voir les appelants).
+function YearSelect({ value, onChange, id }) {
+  return (
+    <select id={id} value={value || ""} onChange={(e) => onChange(e.target.value)} className={inputClass}>
+      <option value="">Général</option>
+      <option value="hk">HK — 1ère année</option>
+      <option value="k">K — 2e année</option>
+    </select>
+  );
+}
+
 function Message({ message }) {
   if (!message) return null;
   return (
@@ -173,8 +187,9 @@ function Dashboard({ token, onLogout }) {
   const [teacher, setTeacher] = useState("");
   const [sections, setSections] = useState([]);
   const [newSectionLabel, setNewSectionLabel] = useState("");
+  const [newSectionYear, setNewSectionYear] = useState("");
   const [videos, setVideos] = useState([]);
-  const [newVideo, setNewVideo] = useState({ title: "", url: "", section: "" });
+  const [newVideo, setNewVideo] = useState({ title: "", url: "", section: "", year: "" });
   const [fileEdits, setFileEdits] = useState({});
   const [uploadFiles, setUploadFiles] = useState([]);
   const [uploadSection, setUploadSection] = useState("");
@@ -191,7 +206,12 @@ function Dashboard({ token, onLogout }) {
         setSections(d.sections || []);
         setVideos(d.videos || []);
         setFileEdits(
-          Object.fromEntries((d.files || []).map((f) => [f.path, { title: f.title, section: f.section || "" }]))
+          Object.fromEntries(
+            (d.files || []).map((f) => [
+              f.path,
+              { title: f.title, section: f.section || "", year: f.year || "" },
+            ])
+          )
         );
       })
       .catch((err) => setMessage({ type: "error", text: err.message }))
@@ -227,12 +247,22 @@ function Dashboard({ token, onLogout }) {
     const label = newSectionLabel.trim();
     if (!label) return;
     const id = uniqueId(slugify(label), new Set(sections.map((s) => s.id)));
-    saveSections([...sections, { id, label, order: sections.length + 1 }]);
+    const section = { id, label, order: sections.length + 1 };
+    if (newSectionYear) section.year = newSectionYear;
+    saveSections([...sections, section]);
     setNewSectionLabel("");
+    setNewSectionYear("");
   };
 
   const updateSectionField = (id, field, value) => {
     setSections((prev) => prev.map((s) => (s.id === id ? { ...s, [field]: value } : s)));
+  };
+
+  // Choix immédiat (select "Année") : on calcule et envoie le tableau
+  // directement, même raison que pour commitVideoField plus bas.
+  const commitSectionField = (id, field, value) => {
+    const next = sections.map((s) => (s.id === id ? { ...s, [field]: value } : s));
+    saveSections(next);
   };
 
   // Glisser-déposer : l'ordre affiché = l'ordre stocké, recalculé (1, 2, 3…)
@@ -253,7 +283,13 @@ function Dashboard({ token, onLogout }) {
   };
 
   // --- Vidéos ---
-  const stripVideo = ({ title, url, section }) => (section ? { title, url, section } : { title, url });
+  // "year" ne compte que quand il n'y a pas de section (voir YearSelect) —
+  // on ne le garde donc que dans ce cas, comme le fait déjà le serveur.
+  const stripVideo = ({ title, url, section, year }) => {
+    if (section) return { title, url, section };
+    if (year) return { title, url, year };
+    return { title, url };
+  };
 
   const persistVideos = async (next) => {
     try {
@@ -268,7 +304,7 @@ function Dashboard({ token, onLogout }) {
   const addVideo = () => {
     if (!newVideo.title || !newVideo.url) return;
     persistVideos([...videos, newVideo]);
-    setNewVideo({ title: "", url: "", section: "" });
+    setNewVideo({ title: "", url: "", section: "", year: "" });
   };
 
   // Frappe : juste l'état local (pas d'appel réseau par caractère tapé).
@@ -298,6 +334,7 @@ function Dashboard({ token, onLogout }) {
     const edit = { ...fileEdits[path], ...overrides };
     const payload = { title: edit.title };
     if (edit.section) payload.section = edit.section;
+    else if (edit.year) payload.year = edit.year;
     try {
       await putConfig(slug, token, { files: { [path]: payload } });
       setFileEdits((prev) => ({ ...prev, [path]: edit }));
@@ -445,6 +482,11 @@ function Dashboard({ token, onLogout }) {
                         />
                       </Labeled>
                     </div>
+                    <div className="w-44 shrink-0">
+                      <Labeled label="Année">
+                        <YearSelect value={s.year} onChange={(val) => commitSectionField(s.id, "year", val)} />
+                      </Labeled>
+                    </div>
                     <button
                       type="button"
                       onClick={() => removeSection(s.id)}
@@ -465,6 +507,11 @@ function Dashboard({ token, onLogout }) {
                       placeholder="ex. Annales"
                       className={inputClass}
                     />
+                  </Labeled>
+                </div>
+                <div className="w-44 shrink-0">
+                  <Labeled label="Année">
+                    <YearSelect value={newSectionYear} onChange={setNewSectionYear} />
                   </Labeled>
                 </div>
                 <button type="button" onClick={addSection} disabled={!newSectionLabel.trim()} className={primaryButtonClass}>
@@ -502,7 +549,7 @@ function Dashboard({ token, onLogout }) {
 
               <div className="mt-4 space-y-3">
                 {files.map((f) => {
-                  const edit = fileEdits[f.path] || { title: f.title, section: f.section || "" };
+                  const edit = fileEdits[f.path] || { title: f.title, section: f.section || "", year: f.year || "" };
                   return (
                     <div key={f.path} className="flex flex-wrap items-end gap-2 border-b border-encre/10 pb-3 last:border-b-0">
                       <div className="flex-1 basis-40">
@@ -527,6 +574,19 @@ function Dashboard({ token, onLogout }) {
                           />
                         </Labeled>
                       </div>
+                      {!edit.section && (
+                        <div className="w-44 shrink-0">
+                          <Labeled label="Année">
+                            <YearSelect
+                              value={edit.year}
+                              onChange={(val) => {
+                                updateFileEdit(f.path, "year", val);
+                                saveFile(f.path, { year: val });
+                              }}
+                            />
+                          </Labeled>
+                        </div>
+                      )}
                       <button type="button" onClick={() => deleteFile(f.path)} className={dangerButtonClass}>
                         Supprimer
                       </button>
@@ -574,6 +634,19 @@ function Dashboard({ token, onLogout }) {
                         />
                       </Labeled>
                     </div>
+                    {!v.section && (
+                      <div className="w-44 shrink-0">
+                        <Labeled label="Année">
+                          <YearSelect
+                            value={v.year}
+                            onChange={(val) => {
+                              updateVideoField(i, "year", val);
+                              commitVideoField(i, "year", val);
+                            }}
+                          />
+                        </Labeled>
+                      </div>
+                    )}
                     <button type="button" onClick={() => removeVideo(i)} className={dangerButtonClass}>
                       Supprimer
                     </button>
@@ -609,6 +682,13 @@ function Dashboard({ token, onLogout }) {
                     />
                   </Labeled>
                 </div>
+                {!newVideo.section && (
+                  <div className="w-44 shrink-0">
+                    <Labeled label="Année">
+                      <YearSelect value={newVideo.year} onChange={(val) => setNewVideo({ ...newVideo, year: val })} />
+                    </Labeled>
+                  </div>
+                )}
                 <button
                   type="button"
                   onClick={addVideo}

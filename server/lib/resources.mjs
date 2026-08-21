@@ -6,9 +6,15 @@
 //   <root>/<slug>/<fichier>      tous les fichiers d'une matière, à plat
 //
 // Les "sections" ne sont PAS des dossiers : ce sont des entrées de
-// .config.json ({id, label, order}), et un fichier ou une vidéo y est
+// .config.json ({id, label, order, year}), et un fichier ou une vidéo y est
 // rattaché par son id via files[path].section / videos[i].section. Ça
 // permet de réorganiser/renommer sans jamais toucher au disque.
+//
+// "year" (sur une section, ou directement sur un fichier/vidéo sans
+// section) vaut "hk", "k", ou absent (= Général). Une page matière affiche
+// donc jusqu'à 3 grands groupes : Général, HK (1ère année), K (2e année).
+// Quand un fichier/vidéo a une section, c'est toujours l'année de la
+// section qui fait autorité — voir effectiveYear() plus bas.
 //
 // ".config.json" est un fichier caché : il est donc automatiquement exclu
 // du scan (comme .DS_Store, .gitkeep...).
@@ -96,8 +102,27 @@ function collectFiles(dir) {
     .map((entry) => ({ path: entry.name, name: entry.name }));
 }
 
+// Une matière n'a que trois "grandes sections" possibles, dans cet ordre :
+// Général (year absent/null), HK (1ère année), K (2e année).
+const YEAR_RANK = { null: 0, hk: 1, k: 2 };
+
+function normalizeYear(year) {
+  return year === "hk" || year === "k" ? year : null;
+}
+
+// L'année effective d'un fichier/vidéo vient de sa section si elle en a
+// une (la section fait autorité), sinon de sa propre valeur "year" — voir
+// le commentaire en tête de fichier.
+function effectiveYear(item, sectionMeta) {
+  if (item.section) return normalizeYear(sectionMeta.get(item.section)?.year);
+  return normalizeYear(item.year);
+}
+
 function sortByOrder(items, sectionMeta) {
   items.sort((a, b) => {
+    const yearA = YEAR_RANK[a.year];
+    const yearB = YEAR_RANK[b.year];
+    if (yearA !== yearB) return yearA - yearB;
     const orderA = a.section ? sectionMeta.get(a.section)?.order ?? Infinity : -Infinity;
     const orderB = b.section ? sectionMeta.get(b.section)?.order ?? Infinity : -Infinity;
     if (orderA !== orderB) return orderA - orderB;
@@ -123,6 +148,7 @@ export function getResourceData(rootDir, slug) {
     return {
       section: override.section || null,
       group: override.section ? sectionMeta.get(override.section)?.label || null : null,
+      year: effectiveYear(override, sectionMeta),
       title: override.title || prettify(f.name),
       url: `/resources/${safeSlug}/${f.path}`,
       path: f.path,
@@ -134,6 +160,7 @@ export function getResourceData(rootDir, slug) {
     ...v,
     section: v.section || null,
     group: v.section ? sectionMeta.get(v.section)?.label || null : null,
+    year: effectiveYear(v, sectionMeta),
   }));
   sortByOrder(videos, sectionMeta);
 
