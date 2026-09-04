@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 export default function Nav() {
   const links = [
     { href: "/#presentation", label: "La filière" },
-    { href: "/#disciplines", label: "Disciplines" },
-    { href: "/#ressources", label: "Ressources" },
+    { href: "/#disciplines", label: "Ressources" },
     { href: "/#vie-etudiante", label: "Vie étudiante" },
     { href: "/#temoignages", label: "Témoignages" },
     { href: "/#contact", label: "Contact" },
@@ -23,7 +22,7 @@ export default function Nav() {
         </Link>
         <ul className="hidden gap-8 font-mono text-xs uppercase tracking-widest text-ardoise sm:flex">
           {links.map((l) => (
-            <li key={l.href}>
+            <li key={l.label}>
               <a
                 href={l.href}
                 className="transition-colors hover:text-bronze"

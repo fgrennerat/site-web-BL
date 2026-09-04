@@ -7,7 +7,7 @@ export default function Disciplines() {
       <div className="mx-auto max-w-6xl">
         <div className="flex items-baseline justify-between gap-4">
           <h2 className="font-display text-3xl font-medium text-encre">
-            Les disciplines
+            Ressources disciplinaires
           </h2>
           <span className="font-mono text-xs uppercase tracking-widest text-ardoise">
             Cliquez pour voir les ressources
@@ -15,9 +15,11 @@ export default function Disciplines() {
         </div>
 
         <div className="mt-10 grid gap-px overflow-hidden border border-encre/15 bg-encre/15 sm:grid-cols-2 lg:grid-cols-3">
-          {disciplines.map((d) => (
-            <DisciplineCard key={d.code} discipline={d} />
-          ))}
+          {disciplines
+            .filter((d) => !d.hidden)
+            .map((d) => (
+              <DisciplineCard key={d.slug} discipline={d} />
+            ))}
         </div>
       </div>
     </section>

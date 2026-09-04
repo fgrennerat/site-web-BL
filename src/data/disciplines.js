@@ -7,6 +7,14 @@
 //
 // "code" sert de badge court affiché sur les cartes. "slug" sert à la fois
 // d'URL de la page matière (/<slug>) et de nom de dossier de ressources.
+//
+// Clés optionnelles :
+//   path     URL de la page si elle diffère de /<slug> (ex. /lv2/allemand
+//            pour le slug "lv2-allemand" : les slugs restent plats, c'est
+//            aussi le nom de dossier de ressources).
+//   hidden   la matière n'apparaît pas dans la grille de l'accueil (elle
+//            reste accessible par son URL et depuis /admin).
+//   related  slugs des pages liées, affichées en sommaire sur la page.
 
 export const disciplines = [
   {
@@ -62,6 +70,60 @@ export const disciplines = [
     slug: "lv2",
     accent: "encre",
     description: "Allemand / espagnol / italien / arabe / chinois",
+    // Les trois LV2 principales ont chacune leur propre page : la page /lv2
+    // sert de sommaire et renvoie vers elles (voir SubjectPage.jsx).
+    related: [
+      "lv2-allemand",
+      "lv2-espagnol",
+      "lv2-italien",
+      "lv2-arabe",
+      "lv2-chinois",
+    ],
+  },
+  {
+    code: "LV2 (2h)",
+    name: "Allemand",
+    slug: "lv2-allemand",
+    path: "/lv2/allemand",
+    accent: "encre",
+    hidden: true,
+    description: "",
+  },
+  {
+    code: "LV2 (2h)",
+    name: "Espagnol",
+    slug: "lv2-espagnol",
+    path: "/lv2/espagnol",
+    accent: "bronze",
+    hidden: true,
+    description: "",
+  },
+  {
+    code: "LV2 (2h)",
+    name: "Italien",
+    slug: "lv2-italien",
+    path: "/lv2/italien",
+    accent: "sauge",
+    hidden: true,
+    description: "",
+  },
+  {
+    code: "LV2 (2h)",
+    name: "Arabe",
+    slug: "lv2-arabe",
+    path: "/lv2/arabe",
+    accent: "encre",
+    hidden: true,
+    description: "",
+  },
+  {
+    code: "LV2 (2h)",
+    name: "Chinois",
+    slug: "lv2-chinois",
+    path: "/lv2/chinois",
+    accent: "bronze",
+    hidden: true,
+    description: "",
   },
   {
     code: "GEO (4h)",
@@ -69,6 +131,13 @@ export const disciplines = [
     slug: "geo",
     accent: "bronze",
     description: "Enjeux géopolitiques, en lien direct avec l'actualité.",
+  },
+  {
+    code: "EPS (2h)",
+    name: "Sport",
+    slug: "eps",
+    accent: "sauge",
+    description: " ",
   },
   {
     code: "CG (2h)",
@@ -79,10 +148,24 @@ export const disciplines = [
       "Un enseignement transversal qui articule les autres disciplines et prépare à l'épreuve de culture générale des concours.",
   },
   {
-    code: "EPS (2h)",
-    name: "Sport",
-    slug: "eps",
-    accent: "sauge",
-    description: " ",
+    code: "EXTRA",
+    name: "Chorale",
+    slug: "chorale",
+    accent: "bronze",
+    description: "Pratique du chant choral.",
   },
 ];
+
+// URL de la page d'une matière : "path" si elle est déclarée, /<slug> sinon.
+export function disciplinePath(discipline) {
+  return discipline.path || `/${discipline.slug}`;
+}
+
+export function findDisciplineByPath(pathname) {
+  const clean = pathname.replace(/\/+$/, "") || "/";
+  return disciplines.find((d) => disciplinePath(d) === clean);
+}
+
+export function findDisciplineBySlug(slug) {
+  return disciplines.find((d) => d.slug === slug);
+}

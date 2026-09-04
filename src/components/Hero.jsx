@@ -21,7 +21,7 @@ export default function Hero() {
 
         <div className="mt-10 flex flex-wrap gap-4">
           <a
-            href="#ressources"
+            href="#disciplines"
             className="border border-encre bg-encre px-6 py-3 font-mono text-xs uppercase tracking-widest text-velin transition-colors hover:bg-encre-light"
           >
             Accéder aux ressources

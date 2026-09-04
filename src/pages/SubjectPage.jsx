@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { disciplines } from "../data/disciplines";
+import { Link, useLocation } from "react-router-dom";
+import {
+  disciplinePath,
+  findDisciplineByPath,
+  findDisciplineBySlug,
+} from "../data/disciplines";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import ResourceSections from "../components/ResourceSections";
@@ -14,9 +18,21 @@ const accentText = {
   sauge: "text-sauge",
 };
 
+const accentBar = {
+  encre: "bg-encre",
+  bronze: "bg-bronze",
+  sauge: "bg-sauge",
+};
+
+const accentRing = {
+  encre: "hover:border-encre",
+  bronze: "hover:border-bronze",
+  sauge: "hover:border-sauge",
+};
+
 export default function SubjectPage() {
-  const { slug } = useParams();
-  const discipline = disciplines.find((d) => d.slug === slug);
+  const { pathname } = useLocation();
+  const discipline = findDisciplineByPath(pathname);
   const [data, setData] = useState(null);
   const [error, setError] = useState(false);
 
@@ -36,6 +52,9 @@ export default function SubjectPage() {
   if (!discipline) return <NotFound />;
 
   const description = data?.description || discipline.description;
+  // Pages liées (ex. les trois LV2 depuis /lv2) : un slug inconnu est ignoré
+  // plutôt que de faire planter la page.
+  const related = (discipline.related || []).map(findDisciplineBySlug).filter(Boolean);
 
   return (
     <div className="min-h-screen bg-velin text-encre">
@@ -51,6 +70,25 @@ export default function SubjectPage() {
         )}
         {description && (
           <p className="mt-4 max-w-2xl leading-relaxed text-ardoise">{description}</p>
+        )}
+
+        {related.length > 0 && (
+          <ul className="mt-8 grid gap-px overflow-hidden border border-encre/15 bg-encre/15 sm:grid-cols-2 lg:grid-cols-3">
+            {related.map((r) => (
+              <li key={r.slug}>
+                <Link
+                  to={disciplinePath(r)}
+                  className={`group relative flex h-full flex-col gap-2 border border-encre/15 bg-velin px-5 py-5 transition-colors ${accentRing[r.accent]}`}
+                >
+                  <span className={`absolute left-0 top-0 h-full w-1 ${accentBar[r.accent]}`} />
+                  <span className="font-display text-lg text-encre">{r.name}</span>
+                  <span className="font-mono text-xs uppercase tracking-widest text-ardoise">
+                    Ressources
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
         )}
 
         <div className="mt-10">

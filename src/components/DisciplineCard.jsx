@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { disciplinePath } from "../data/disciplines";
 
 const accentStyles = {
   encre: { bar: "bg-encre", text: "text-encre", ring: "hover:border-encre" },
@@ -11,7 +12,7 @@ export default function DisciplineCard({ discipline }) {
 
   return (
     <Link
-      to={`/${discipline.slug}`}
+      to={disciplinePath(discipline)}
       className={`group relative flex flex-col gap-3 border border-encre/15 bg-velin px-5 py-6 text-left transition-colors ${accent.ring}`}
     >
       <span className={`absolute left-0 top-0 h-full w-1 ${accent.bar}`} />
