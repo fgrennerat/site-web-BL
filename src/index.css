@@ -13,6 +13,10 @@
   --color-bronze-light: #c99a5c;
   --color-sauge: #5f7a68;
   --color-ardoise: #5b6472;
+  /* Accents des rubriques hors disciplines : Chorale (prune) et
+     Ressources générales (brique). */
+  --color-prune: #6b4a6e;
+  --color-brique: #9c5442;
 }
 
 html {

@@ -5,7 +5,6 @@ import Presentation from "../components/Presentation";
 import Disciplines from "../components/Disciplines";
 import StudentLife from "../components/StudentLife";
 import Testimonials from "../components/Testimonials";
-import GeneralResources from "../components/GeneralResources";
 import Footer from "../components/Footer";
 
 export default function Home() {
@@ -29,7 +28,6 @@ export default function Home() {
         <Hero />
         <Presentation />
         <Disciplines />
-        <GeneralResources />
         <StudentLife />
         <Testimonials />
       </main>

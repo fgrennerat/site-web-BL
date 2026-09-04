@@ -3,10 +3,9 @@ import { disciplines } from "../data/disciplines";
 
 const TOKEN_KEY = "admin_token";
 
-const SLUGS = [
-  { slug: "general", label: "Général (accueil)" },
-  ...disciplines.map((d) => ({ slug: d.slug, label: `${d.name} — ${d.code}` })),
-];
+// "general" n'est plus un cas à part : il a sa propre entrée dans
+// disciplines.js (sa carte et sa page /general) comme les autres rubriques.
+const SLUGS = disciplines.map((d) => ({ slug: d.slug, label: `${d.name} — ${d.code}` }));
 
 const COMBINING_MARKS = /[\u0300-\u036f]/g;
 

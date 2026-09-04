@@ -15,6 +15,8 @@
 //   hidden   la matière n'apparaît pas dans la grille de l'accueil (elle
 //            reste accessible par son URL et depuis /admin).
 //   related  slugs des pages liées, affichées en sommaire sur la page.
+//   decor    ornement décoratif affiché sur la page ("musique" pour la
+//            chorale — voir SubjectPage.jsx).
 
 export const disciplines = [
   {
@@ -151,8 +153,19 @@ export const disciplines = [
     code: "EXTRA",
     name: "Chorale",
     slug: "chorale",
-    accent: "bronze",
+    accent: "prune",
+    decor: "musique",
     description: "Pratique du chant choral.",
+  },
+  // Ressources non spécifiques à une matière (emploi du temps, travail de
+  // rentrée...). Le slug "general" est celui que l'API utilise déjà pour
+  // ces documents — c'est aussi l'entrée "Général" de /admin.
+  {
+    code: "COMMUN",
+    name: "Ressources générales",
+    slug: "general",
+    accent: "brique",
+    description: "Documents communs à toutes les matières.",
   },
 ];
 

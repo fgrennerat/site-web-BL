@@ -8,6 +8,7 @@ import {
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import ResourceSections from "../components/ResourceSections";
+import MusicNotes from "../components/MusicNotes";
 import NotFound from "./NotFound";
 
 // Classes statiques (pas de `text-${accent}` dynamique : Tailwind ne peut
@@ -16,18 +17,24 @@ const accentText = {
   encre: "text-encre",
   bronze: "text-bronze",
   sauge: "text-sauge",
+  prune: "text-prune",
+  brique: "text-brique",
 };
 
 const accentBar = {
   encre: "bg-encre",
   bronze: "bg-bronze",
   sauge: "bg-sauge",
+  prune: "bg-prune",
+  brique: "bg-brique",
 };
 
 const accentRing = {
   encre: "hover:border-encre",
   bronze: "hover:border-bronze",
   sauge: "hover:border-sauge",
+  prune: "hover:border-prune",
+  brique: "hover:border-brique",
 };
 
 export default function SubjectPage() {
@@ -70,6 +77,12 @@ export default function SubjectPage() {
         )}
         {description && (
           <p className="mt-4 max-w-2xl leading-relaxed text-ardoise">{description}</p>
+        )}
+
+        {discipline.decor === "musique" && (
+          <MusicNotes
+            className={`mt-8 w-full max-w-2xl ${accentText[discipline.accent]} opacity-50`}
+          />
         )}
 
         {related.length > 0 && (

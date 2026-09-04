@@ -5,6 +5,8 @@ const accentStyles = {
   encre: { bar: "bg-encre", text: "text-encre", ring: "hover:border-encre" },
   bronze: { bar: "bg-bronze", text: "text-bronze", ring: "hover:border-bronze" },
   sauge: { bar: "bg-sauge", text: "text-sauge", ring: "hover:border-sauge" },
+  prune: { bar: "bg-prune", text: "text-prune", ring: "hover:border-prune" },
+  brique: { bar: "bg-brique", text: "text-brique", ring: "hover:border-brique" },
 };
 
 export default function DisciplineCard({ discipline }) {

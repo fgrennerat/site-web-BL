@@ -7,7 +7,7 @@ export default function Disciplines() {
       <div className="mx-auto max-w-6xl">
         <div className="flex items-baseline justify-between gap-4">
           <h2 className="font-display text-3xl font-medium text-encre">
-            Ressources disciplinaires
+            Disciplines et ressources
           </h2>
           <span className="font-mono text-xs uppercase tracking-widest text-ardoise">
             Cliquez pour voir les ressources
