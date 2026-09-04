@@ -20,8 +20,7 @@ export default function GeneralResources() {
           Ressources générales
         </h2>
         <p className="mt-2 max-w-2xl text-sm text-ardoise">
-          Documents communs à toutes les matières. Les ressources propres à
-          chaque discipline sont sur sa page dédiée.
+          Documents communs à toutes les matières : 
         </p>
 
         <div className="mt-8">

@@ -16,7 +16,7 @@ export default function Footer({ minimal = false }) {
           <p className="font-display text-2xl text-encre">Lycée Mounier</p>
           <p className="mt-2 max-w-sm text-sm leading-relaxed text-ardoise">
             Une question sur la filière, l'admission ou les enseignements&nbsp;?
-            L'équipe pédagogique se tient à votre disposition.
+            N'hésitez pas à contacter le lycée.
           </p>
         </div>
 

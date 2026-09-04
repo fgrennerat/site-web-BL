@@ -24,7 +24,7 @@ export const testimonials = [
       thumbnail: "/images/temoignages/Eva.png",
     },
   },
-  {
+  /* {
     name: "Hugo",
     promotion: "Promotion 2024",
     //path: "Ancien étudiant de la B/L de Mounier",
@@ -33,5 +33,5 @@ export const testimonials = [
       title: "Lire la lettre complète",
       url: "/documents/temoignages/Hugo.pdf",
     },
-  },
+  }, */
 ];
