@@ -77,7 +77,11 @@ app.post("/api/resources/:slug/files", requireAuth, upload.single("file"), (req,
   try {
     if (!req.file) throw new HttpError(400, "Aucun fichier reçu");
     const overwrite = req.query.overwrite === "true";
-    const relPath = saveUpload(RESOURCES_DIR, req.params.slug, req.file.originalname, req.file.buffer, {
+    // busboy décode les en-têtes multipart en latin1 par défaut ; les
+    // navigateurs envoient le nom de fichier en UTF-8, d'où les accents
+    // mal interprétés sans cette re-décodage.
+    const originalname = Buffer.from(req.file.originalname, "latin1").toString("utf-8");
+    const relPath = saveUpload(RESOURCES_DIR, req.params.slug, originalname, req.file.buffer, {
       overwrite,
       section: req.body?.section || undefined,
     });

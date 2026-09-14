@@ -356,6 +356,8 @@ function Dashboard({ token, onLogout }) {
 
   // Upload par lot fait côté client : une requête par fichier, envoyées
   // l'une après l'autre (le serveur ne connaît que l'upload à un fichier).
+  // "overwrite=true" : un fichier du même nom est remplacé silencieusement,
+  // sans confirmation, plutôt que de faire échouer l'envoi (409).
   const upload = async (e) => {
     e.preventDefault();
     if (uploadFiles.length === 0) return;
@@ -366,7 +368,7 @@ function Dashboard({ token, onLogout }) {
       form.append("file", file);
       if (uploadSection) form.append("section", uploadSection);
       try {
-        await api(`/api/resources/${slug}/files`, token, { method: "POST", body: form });
+        await api(`/api/resources/${slug}/files?overwrite=true`, token, { method: "POST", body: form });
         uploaded.push(file.name);
       } catch (err) {
         errors.push({ filename: file.name, error: err.message });
