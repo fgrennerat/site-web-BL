@@ -32,6 +32,12 @@ export default function Hero() {
           >
             Découvrir la filière
           </a>
+          <a
+            href="#resultats"
+            className="border border-encre/30 px-6 py-3 font-mono text-xs uppercase tracking-widest text-encre transition-colors hover:border-encre"
+          >
+            Résultats
+          </a>
         </div>
 
         <div className="mt-12 grid max-w-xl gap-px overflow-hidden border border-encre/15 bg-encre/15 sm:grid-cols-2">

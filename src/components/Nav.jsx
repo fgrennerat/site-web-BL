@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 export default function Nav() {
   const links = [
     { href: "/#presentation", label: "La filière" },
+    { href: "/#resultats", label: "Résultats" },
     { href: "/#disciplines", label: "Ressources" },
     { href: "/#vie-etudiante", label: "Vie étudiante" },
     { href: "/#temoignages", label: "Témoignages" },

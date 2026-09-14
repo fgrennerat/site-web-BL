@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import Nav from "../components/Nav";
 import Hero from "../components/Hero";
 import Presentation from "../components/Presentation";
+import Results from "../components/Results";
 import Disciplines from "../components/Disciplines";
 import StudentLife from "../components/StudentLife";
 import Testimonials from "../components/Testimonials";
@@ -27,6 +28,7 @@ export default function Home() {
       <main>
         <Hero />
         <Presentation />
+        <Results />
         <Disciplines />
         <StudentLife />
         <Testimonials />

@@ -167,6 +167,19 @@ export const disciplines = [
     accent: "brique",
     description: "Documents communs à toutes les matières.",
   },
+  // Rubrique homepage dédiée (voir components/Results.jsx), pas une matière :
+  // "hidden" pour ne pas dupliquer une carte dans la grille "Disciplines et
+  // ressources". L'entrée existe quand même ici pour bénéficier gratuitement
+  // du stockage/admin par slug (comme "general") et d'une page /résultats
+  // de secours via SubjectPage.
+  {
+    code: "RÉSULTATS",
+    name: "Résultats concours et poursuite d'études",
+    slug: "resultats-concours",
+    accent: "bronze",
+    hidden: true,
+    description: "Résultats aux concours et poursuite d'études des anciens élèves.",
+  },
 ];
 
 // URL de la page d'une matière : "path" si elle est déclarée, /<slug> sinon.
